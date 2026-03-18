@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-primary: #1a1a2e;
+  --color-accent: #e94560;
+  --color-accent-hover: #c81e45;
+  --color-pop-yellow: #ffe66d;
+  --color-pop-blue: #4ecdc4;
+  --color-pop-purple: #a855f7;
+  --color-pop-orange: #ff6b35;
+  --color-surface-light: #faf9f6;
+  --color-surface-dark: #0f0f23;
+  --color-muted-light: #6b7280;
+  --color-muted-dark: #9ca3af;
+  --color-border-light: #1a1a2e;
+  --color-border-dark: #374151;
+  --color-card-light: #ffffff;
+  --color-card-dark: #1a1a2e;
+  --font-heading: var(--font-space-grotesk), ui-monospace, monospace;
+  --font-body: var(--font-dm-sans), system-ui, sans-serif;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  30% { transform: translate(3%, -15%); }
+  50% { transform: translate(12%, 9%); }
+  70% { transform: translate(9%, 4%); }
+  90% { transform: translate(-1%, 7%); }
+}
+
+/* ===== LIGHT / DARK TEXT & BG ===== */
+:root {
+  --text-main: #1a1a2e;
+  --bg-main: #faf9f6;
+}
+
+.dark {
+  --text-main: #ffffff;
+  --bg-main: #0f0f23;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+::selection {
+  background-color: #e94560;
+  color: #ffffff;
+}
+
+@utility text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(135deg, #e94560, #a855f7, #4ecdc4);
+}
+
+@utility brutal-shadow {
+  box-shadow: 6px 6px 0px #1a1a2e;
+}
+
+@utility brutal-shadow-sm {
+  box-shadow: 4px 4px 0px #1a1a2e;
+}
+
+@utility brutal-shadow-accent {
+  box-shadow: 6px 6px 0px #e94560;
+}
+
+@utility brutal-border {
+  border: 3px solid #1a1a2e;
+}
+
+.dark .brutal-shadow {
+  box-shadow: 6px 6px 0px #4ecdc4;
+}
+
+.dark .brutal-shadow-sm {
+  box-shadow: 4px 4px 0px #4ecdc4;
+}
+
+.dark .brutal-shadow-accent {
+  box-shadow: 6px 6px 0px #ffe66d;
+}
+
+.dark .brutal-border {
+  border-color: #4ecdc4;
+}
+
+/* Strong/bold text inside muted paragraphs */
+strong {
+  color: var(--color-accent);
+}
+
+/* Scrolled header */
+.scrolled-header {
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #1a1a2e;
+  border-color: #1a1a2e;
+}
+
+.dark .scrolled-header {
+  background-color: rgba(15, 15, 35, 0.95);
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+/* Noise texture overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  width: 200%;
+  height: 200%;
+  background: transparent url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E") repeat;
+  pointer-events: none;
+  z-index: 9999;
+  animation: grain 8s steps(10) infinite;
+}
